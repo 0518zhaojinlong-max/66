@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户注册</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="card">
+    <h1>创建账号</h1>
+
+    <form th:action="@{/register}" th:object="${form}" method="post" novalidate>
+        <div class="alert alert-error" th:if="${#fields.hasGlobalErrors()}">
+            <div th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        </div>
+
+        <div class="field">
+            <label for="username">用户名</label>
+            <input id="username" type="text" th:field="*{username}" th:errorclass="invalid"
+                   placeholder="3-32 位字母、数字或下划线" autocomplete="username">
+            <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        </div>
+
+        <div class="field">
+            <label for="email">邮箱</label>
+            <input id="email" type="email" th:field="*{email}" th:errorclass="invalid"
+                   placeholder="you@example.com" autocomplete="email">
+            <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+
+        <div class="field">
+            <label for="password">密码</label>
+            <input id="password" type="password" th:field="*{password}" th:errorclass="invalid"
+                   placeholder="至少 8 位，包含字母和数字" autocomplete="new-password">
+            <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        </div>
+
+        <div class="field">
+            <label for="confirmPassword">确认密码</label>
+            <input id="confirmPassword" type="password" th:field="*{confirmPassword}" th:errorclass="invalid"
+                   autocomplete="new-password">
+            <div class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+            <div class="error" th:if="${#fields.hasErrors('passwordConfirmed')}" th:errors="*{passwordConfirmed}"></div>
+        </div>
+
+        <button type="submit">注册</button>
+    </form>
+
+    <div class="footer">已有账号？<a th:href="@{/login}">去登录</a></div>
+</div>
+</body>
+</html>

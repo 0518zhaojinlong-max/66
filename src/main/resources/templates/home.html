@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="card">
+    <h1>欢迎，<span th:text="${username}">用户</span>！</h1>
+    <p style="text-align:center">您已成功登录。</p>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">退出登录</button>
+    </form>
+</div>
+</body>
+</html>
